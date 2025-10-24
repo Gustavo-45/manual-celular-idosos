@@ -1,0 +1,296 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo do Celular</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Calm Neutrals with Green/Red Accents (bg-amber-50, bg-white, text-gray-800, text-emerald-600/700, text-red-600) -->
+    <!-- Application Structure Plan: A tab-based navigation SPA (Início, "Zap Zap", Cuidado!/Golpes, Resumo). This structure is more user-friendly than linear slides, allowing users to find information by topic. The "Cuidado!" tab uses an accordion to detail each scam, preventing information overload. The "Zap Zap" tab uses internal buttons to switch between tutorials (Text, Audio, Video). This design is intuitive, interactive, and focuses on ease of exploration for the target audience (seniors). -->
+    <!-- Visualization & Content Choices: Report Info: Slides 1-2 (Basics/Icons) -> Goal: Inform -> Viz: HTML/CSS Grid -> Interaction: Static -> Justification: Clear grouping of basic concepts. | Report Info: Slides 3-5 (WhatsApp) -> Goal: Inform (Process) -> Viz: HTML lists shown/hidden by buttons -> Interaction: JS click events -> Justification: Breaks down tasks interactively. | Report Info: Slides 6-10 (Scams) -> Goal: Organize/Warn -> Viz: Accordion (HTML/CSS/JS) -> Interaction: JS click to expand/collapse -> Justification: Manages complex information in digestible parts. | Report Info: Slides 11-12 (Summary) -> Goal: Inform (Summary) -> Viz: HTML list -> Interaction: Static -> Justification: Clear final checklist. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        .tab-button.active {
+            border-bottom-width: 4px;
+            border-color: #059669; /* emerald-600 */
+            color: #047857; /* emerald-700 */
+            font-weight: 600;
+        }
+        .zap-button.active {
+            background-color: #059669; /* emerald-600 */
+            color: white;
+        }
+        .accordion-header {
+            cursor: pointer;
+        }
+        .accordion-arrow {
+            transition: transform 0.2s ease;
+        }
+        .accordion-header[aria-expanded="true"] .accordion-arrow {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-amber-50 font-sans leading-relaxed text-gray-800">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-emerald-700">👵👴 Guia Amigável do Celular e do "Zap Zap"! 📱</h1>
+            <p class="text-xl text-gray-600 mt-2">Vamos aprender a mexer nessa "janelinha mágica" 🖼️ sem medo.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b-2 border-gray-200 mb-8">
+            <button data-target="tab-inicio" class="tab-button py-3 px-5 text-lg font-medium border-b-4 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 active">
+                🏠 Início
+            </button>
+            <button data-target="tab-zap" class="tab-button py-3 px-5 text-lg font-medium border-b-4 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                🟢 "Zap Zap"
+            </button>
+            <button data-target="tab-golpes" class="tab-button py-3 px-5 text-lg font-medium border-b-4 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                🚫 Cuidado!
+            </button>
+            <button data-target="tab-resumo" class="tab-button py-3 px-5 text-lg font-medium border-b-4 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                🎓 Resumo
+            </button>
+        </nav>
+
+        <main id="content-container">
+
+            <!-- Painel Início (O Básico) -->
+            <div id="tab-inicio" class="tab-panel p-6 bg-white rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold text-emerald-700 mb-6">👆 O Básico (Como Mexer)</h2>
+                <p class="text-base text-gray-600 mb-6">Não precisa ter força! O celular entende o toque. Aqui estão os dois gestos principais e os desenhos (ícones) mais comuns que você verá.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-amber-50 p-4 rounded-lg">
+                        <h3 class="text-2xl font-semibold mb-3">Gestos Principais</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <h4 class="text-lg font-semibold">O Toque Mágico 👆</h4>
+                                <p>Dê um **toque suave** com a ponta do dedo. Não precisa apertar!</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold">Rolar a Tela ↕️</h4>
+                                <p>Para ver o que está mais para baixo, **deslize o dedo** na tela, de baixo para cima.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded-lg">
+                        <h3 class="text-2xl font-semibold mb-3">🎨 Os Desenhos (Ícones)</h3>
+                        <p class="mb-3">Cada desenho é um botão. Os principais são:</p>
+                        <ul class="space-y-2 list-inside">
+                            <li>📞 = Fazer Ligações</li>
+                            <li>📸 = Tirar Fotos</li>
+                            <li>🟢 = O "Zap Zap" (WhatsApp)</li>
+                            <li>✉️ = Mensagens</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Painel "Zap Zap" -->
+            <div id="tab-zap" class="tab-panel hidden p-6 bg-white rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold text-emerald-700 mb-4">🟢 O Famoso "Zap Zap"</h2>
+                <p class="text-base text-gray-600 mb-6">É o seu correio rápido para falar com a família e amigos! Escolha o que você quer aprender a fazer:</p>
+                
+                <div class="flex flex-col sm:flex-row gap-2 rounded-lg bg-gray-100 p-2 mb-6">
+                    <button data-zap-target="zap-escrever" class="zap-button flex-1 py-3 px-4 rounded-md font-medium text-gray-600 hover:bg-gray-200 active">✍️ Mandar Mensagem Escrita</button>
+                    <button data-zap-target="zap-audio" class="zap-button flex-1 py-3 px-4 rounded-md font-medium text-gray-600 hover:bg-gray-200">🎤 Mandar Áudio (Falado)</button>
+                    <button data-zap-target="zap-video" class="zap-button flex-1 py-3 px-4 rounded-md font-medium text-gray-600 hover:bg-gray-200">📹 Ver a Família (Vídeo)</button>
+                </div>
+
+                <div id="zap-content-container" class="bg-amber-50 p-6 rounded-lg">
+                    <div id="zap-escrever" class="zap-panel">
+                        <h3 class="text-2xl font-semibold mb-3">✍️ Como Mandar Mensagem Escrita</h3>
+                        <ol class="list-decimal list-outside space-y-2 pl-6 text-lg">
+                            <li>Toque no nome da pessoa.</li>
+                            <li>Toque na caixa branca (lá embaixo).</li>
+                            <li>Escreva o que quiser.</li>
+                            <li>Toque na setinha (➡️) para enviar!</li>
+                        </ol>
+                    </div>
+                    <div id="zap-audio" class="zap-panel hidden">
+                        <h3 class="text-2xl font-semibold mb-3">🎤 Como Mandar Áudio (A "Carta Falada")</h3>
+                        <p class="text-lg mb-3">Não gosta de digitar? Fale!</p>
+                        <ol class="list-decimal list-outside space-y-2 pl-6 text-lg">
+                            <li>Ache o desenho do **microfone** 🎤.</li>
+                            <li>**APERTE e SEGURE** o dedo em cima dele.</li>
+                            <li>Fale o que você quiser...</li>
+                            <li>**SOLTE** o dedo. A mensagem de voz vai sozinha!</li>
+                        </ol>
+                    </div>
+                    <div id="zap-video" class="zap-panel hidden">
+                        <h3 class="text-2xl font-semibold mb-3">📹 Como Ver a Família (Chamada de Vídeo)</h3>
+                        <p class="text-lg mb-3">Quer matar a saudade vendo o rosto?</p>
+                        <ol class="list-decimal list-outside space-y-2 pl-6 text-lg">
+                            <li>Entre na conversa com a pessoa.</li>
+                            <li>Lá em cima, procure a **câmera** 📹.</li>
+                            <li>Toque nela! Vai começar a chamar.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Painel Golpes -->
+            <div id="tab-golpes" class="tab-panel hidden p-6 bg-white rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold text-red-600 mb-6">🚫🎣 CUIDADO MÁXIMO! As Armadilhas!</h2>
+                <p class="text-base text-gray-600 mb-6">Pessoas más usam o celular para enganar. Aprenda a fugir do "lobo mau"! A primeira coisa a saber é a Regra de Ouro.</p>
+
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-6 rounded-lg mb-8 shadow">
+                    <h3 class="text-2xl font-bold mb-3">🧐 A REGRA DE OURO: O "Desconfiômetro"</h3>
+                    <p class="text-lg">Se algo parecer estranho, esquisito, bom demais para ser verdade ou muito urgente...</p>
+                    <p class="text-xl font-bold mt-2">**DESCONFIE!**</p>
+                    <p class="text-lg mt-2">Na dúvida, **NÃO FAÇA NADA**. Desligue e pergunte para alguém de confiança primeiro!</p>
+                </div>
+
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">As 3 Armadilhas Mais Comuns</h3>
+                <div id="accordion-container" class="space-y-3">
+                    
+                    <!-- Armadilha 1 -->
+                    <div>
+                        <h4 class="accordion-header flex justify-between items-center w-full p-5 font-semibold text-left text-lg bg-red-50 text-red-700 rounded-t-lg hover:bg-red-100" aria-expanded="false">
+                            <span>💸 Armadilha 1: Parente Falso Pedindo Dinheiro</span>
+                            <span class="accordion-arrow text-2xl">▼</span>
+                        </h4>
+                        <div class="accordion-panel hidden p-5 bg-white border border-t-0 border-gray-200 rounded-b-lg">
+                            <p class="font-semibold">O Golpe:</p>
+                            <p class="mb-3">Alguém com a foto do seu filho(a) ou neto(a) te manda mensagem de um número novo.</p>
+                            <p class="font-semibold">A Mensagem Típica:</p>
+                            <p class="mb-3 italic">"Oi mãe, troquei de número. Paga uma conta (PIX) URGENTE pra mim?"</p>
+                            <p class="font-semibold text-red-600">O QUE FAZER:</p>
+                            <ul class="list-disc list-outside pl-6 space-y-2 mt-2">
+                                <li class="font-bold">**PARE!** 🛑 É GOLPE!</li>
+                                <li>**NÃO FAÇA NENHUM PIX!**</li>
+                                <li>**LIGUE** para o número **ANTIGO** do seu parente.</li>
+                                <li class="font-bold">**REGRA:** Nunca transfira sem **OUVIR A VOZ** 🗣️ da pessoa.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Armadilha 2 -->
+                    <div>
+                        <h4 class="accordion-header flex justify-between items-center w-full p-5 font-semibold text-left text-lg bg-red-50 text-red-700 rounded-t-lg hover:bg-red-100" aria-expanded="false">
+                            <span>⛔ Armadilha 2: O Link Estranho ("Porta Falsa")</span>
+                            <span class="accordion-arrow text-2xl">▼</span>
+                        </h4>
+                        <div class="accordion-panel hidden p-5 bg-white border border-t-0 border-gray-200 rounded-b-lg">
+                            <p class="font-semibold">O Golpe:</p>
+                            <p class="mb-3">Uma mensagem (SMS ou Zap) dizendo que você ganhou algo ou deve algo.</p>
+                            <p class="font-semibold">A Mensagem Típica:</p>
+                            <ul class="list-disc list-outside pl-6 mb-3 italic">
+                                <li>"Você ganhou um prêmio!" 🏆</li>
+                                <li>"Sua conta de luz está atrasada..."</li>
+                                <li>"Veja suas fotos que vazaram!"</li>
+                            </ul>
+                            <p class="mb-3">A mensagem vem com umas **letras azuis** (um "link").</p>
+                            <p class="font-semibold text-red-600">O QUE FAZER:</p>
+                            <ul class="list-disc list-outside pl-6 space-y-2 mt-2">
+                                <li class="font-bold">**NÃO TOQUE NAS LETRAS AZUIS!** ⛔</li>
+                                <li>É uma armadilha. Apenas **apague a mensagem**.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Armadilha 3 -->
+                    <div>
+                        <h4 class="accordion-header flex justify-between items-center w-full p-5 font-semibold text-left text-lg bg-red-50 text-red-700 rounded-t-lg hover:bg-red-100" aria-expanded="false">
+                            <span>🔑 Armadilha 3: O Pedido do Código Secreto</span>
+                            <span class="accordion-arrow text-2xl">▼</span>
+                        </h4>
+                        <div class="accordion-panel hidden p-5 bg-white border border-t-0 border-gray-200 rounded-b-lg">
+                            <p class="font-semibold">O Golpe:</p>
+                            <p class="mb-3">Alguém liga ou manda mensagem dizendo que é do Banco, INSS ou do próprio "Zap Zap".</p>
+                            <p class="font-semibold">A Mensagem Típica:</p>
+                            <p class="mb-3 italic">"Precisamos confirmar seu cadastro. Vou te mandar um código de 6 números por SMS, me diga quais são."</p>
+                            <p class="font-semibold text-red-600">O QUE FAZER:</p>
+                            <ul class="list-disc list-outside pl-6 space-y-2 mt-2">
+                                <li class="font-bold">**NUNCA, NUNCA, NUNCA DÊ ESSE CÓDIGO!** 🤫</li>
+                                <li>Esse código é a CHAVE da sua conta.</li>
+                                <li>**Desligue o telefone!**</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Painel Resumo -->
+            <div id="tab-resumo" class="tab-panel hidden p-6 bg-white rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold text-emerald-700 mb-6">🎓 Sua "Formatura"! (Para não esquecer)</h2>
+                <p class="text-base text-gray-600 mb-6">Parabéns! Você já sabe o principal. Aqui está um resumo para você sempre lembrar:</p>
+                <div class="bg-amber-50 p-6 rounded-lg text-lg space-y-4">
+                    <p class="flex items-center"><span class="text-3xl mr-3">✅</span> Na dúvida, **PERGUNTE** para alguém de confiança.</p>
+                    <p class="flex items-center"><span class="text-3xl mr-3">✅</span> Para mandar áudio, **APERTE e SEGURE** o 🎤.</p>
+                    <p class="flex items-center"><span class="text-3xl mr-3">❌</span> **NUNCA** clique em links azuis estranhos.</p>
+                    <p class="flex items-center"><span class="text-3xl mr-3">❌</span> **NUNCA** transfira dinheiro sem **OUVIR A VOZ** 🗣️ do parente.</p>
+                    <p class="flex items-center"><span class="text-3xl mr-3">❌</span> **NUNCA** dê o código de 6 números para ninguém 🔑.</p>
+                </div>
+                
+                <div class="mt-8 text-center">
+                    <p class="text-2xl font-semibold text-gray-700">❤️ Agora vá mandar um "Bom dia" e uma foto bonita para a família!</p>
+                    <p class="text-xl text-gray-600 mt-2">**Use sem medo, mas sempre com Cuidado!**</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const tabs = document.querySelectorAll('.tab-button');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    const targetId = tab.getAttribute('data-target');
+                    
+                    tabPanels.forEach(panel => {
+                        if (panel.id === targetId) {
+                            panel.classList.remove('hidden');
+                        } else {
+                            panel.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const zapButtons = document.querySelectorAll('.zap-button');
+            const zapPanels = document.querySelectorAll('.zap-panel');
+
+            zapButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    zapButtons.forEach(b => b.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const targetId = button.getAttribute('data-zap-target');
+
+                    zapPanels.forEach(panel => {
+                        if (panel.id === targetId) {
+                            panel.classList.remove('hidden');
+                        } else {
+                            panel.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const panel = this.nextElementSibling;
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    panel.classList.toggle('hidden');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+
